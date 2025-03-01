@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 
 // Main function: Accepts polynomial equation input and attempts to solve it
 void main() {
@@ -231,5 +230,25 @@ class PolynomialSolver {
     }
 
     return terms.join(" ") + " = 0";
+  }
+}
+
+// Custom implementation of square root function using Newton's method
+double sqrt(double x) {
+  if (x < 0) {
+    throw ArgumentError(
+        "Cannot compute the square root of a negative number in real domain");
+  }
+  if (x == 0) return 0;
+
+  double guess = x / 2.0;
+  double epsilon = 1e-10; // Precision threshold
+
+  while (true) {
+    double newGuess = 0.5 * (guess + x / guess);
+    if ((newGuess - guess).abs() < epsilon) {
+      return newGuess;
+    }
+    guess = newGuess;
   }
 }
